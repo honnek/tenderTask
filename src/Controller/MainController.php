@@ -1,4 +1,7 @@
 <?php
+
+use JetBrains\PhpStorm\Pure;
+
 spl_autoload('Model/TaskRepository');
 spl_autoload('Model/UserRepository');
 
@@ -7,14 +10,16 @@ spl_autoload('Model/UserRepository');
  */
 class MainController
 {
+    /** @var ViewController $viewController */
+    protected ViewController $viewController;
+
 
     /**
      * Инициализируем поля
      */
-    public function __construct(
-        protected ViewController $viewController,
-    )
+    #[Pure] public function __construct()
     {
+        $this->viewController = new ViewController();
     }
 
     /**
@@ -54,23 +59,18 @@ class MainController
      * @param array|null $params
      * @param array|null $postParams
      */
-    public function actionAddTask(?array $params, ?array $postParams)
+    public function actionAddTender(?array $params, ?array $postParams)
     {
-        if (null === $postParams['email'] || null === $postParams['user'] || null === $postParams['text']) {
-            throw new OutOfBoundsException('Не играйтесь с POST запросами!');
+        if (false) {
+            $task = new Task;
+            $task->setEmail($postParams['email']);
+            $task->setUser($postParams['user']);
+            $task->setText($postParams['text']);
+
+            $this->taskRepository->addNewTask($task);
         }
-        if (!preg_match('/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i', $postParams['email'])) {
-            throw new OutOfBoundsException('Невалидный email!');
-        }
 
-        $task = new Task;
-        $task->setEmail($postParams['email']);
-        $task->setUser($postParams['user']);
-        $task->setText($postParams['text']);
-
-        $this->taskRepository->addNewTask($task);
-
-        header('Location: http://localhost/project/src/index.php/main/main');
+        $this->viewController->display('addTender');
     }
 
     /**

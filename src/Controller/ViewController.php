@@ -40,7 +40,7 @@ class ViewController
     }
 
     /**
-     * метод для отображения шаблона
+     * Метод для отображения шаблона
      * @param string $template
      * @return void
      */
@@ -69,7 +69,7 @@ class ViewController
     }
 
     /**
-     * сохраняем данные с именем $name и значением $value в шаблон
+     * Сохраняем данные с именем $name и значением $value в шаблон
      * @param string $name
      * @param string $value
      * @return void
