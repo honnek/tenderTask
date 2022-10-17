@@ -24,8 +24,10 @@ class Router
     protected null|array $postParams;
 
 
+
     /**
      * Заполняет свойства $controllerName, $action и $params массив (если есть get-параметры)
+     * http://localhost/tender/src/index.php/main/main формат ссылки в результате
      */
     public function __construct(array $request)
     {

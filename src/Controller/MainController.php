@@ -8,11 +8,12 @@ spl_autoload('Model/UserRepository');
 class MainController
 {
 
-
     /**
      * Инициализируем поля
      */
-    public function __construct()
+    public function __construct(
+        protected ViewController $viewController,
+    )
     {
     }
 
@@ -26,26 +27,24 @@ class MainController
             session_destroy();
         }
 
+//        $page = $params['page'] ?? 1;
+//        $orderBy = $params['by'] ?? '';
+//        $limit = 3;
+//        $offset = ($page - 1) * $limit;
+//        $tasks = $this->taskRepository->findWithLimitOffsetOrderBy($limit, $offset, $orderBy);
 
-        $page = $params['page'] ?? 1;
-        $orderBy = $params['by'] ?? '';
-        $limit = 3;
-        $offset = ($page - 1) * $limit;
-        $tasks = $this->taskRepository->findWithLimitOffsetOrderBy($limit, $offset, $orderBy);
-
-        if (!$tasks) {
-            throw new OutOfBoundsException(message: 'Ошибка запроса к БД');
-        }
+//        if (!$tasks) {
+//            throw new OutOfBoundsException(message: 'Ошибка запроса к БД');
+//        }
 
         $this->viewController->setData([
-            'page' => $page,
-            'tasks' => $tasks,
-            'limit' => $limit,
-            'countAll' => $this->taskRepository->getCountTasks(),
-            'orderBy' => $orderBy,
+//            'page' => $page,
+//            'tasks' => $tasks,
+//            'limit' => $limit,
+//            'countAll' => $this->taskRepository->getCountTasks(),
+//            'orderBy' => $orderBy,
             'isAdmin' => !!($_SESSION['user_id'] ?? false),
         ]);
-
 
         $this->viewController->display('main');
     }
