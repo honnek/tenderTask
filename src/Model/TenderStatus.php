@@ -17,9 +17,9 @@ class TenderStatus
     private string $value;
 
     /**
-     * @param string $value
+     * @param string|null $value
      */
-    public function __construct(string $value = self::EMPTY)
+    public function __construct(?string $value = self::EMPTY)
     {
         $this->value = $value;
     }
