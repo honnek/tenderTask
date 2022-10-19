@@ -55,19 +55,26 @@ class MainController
     }
 
     /**
-     * Экшн для добавления задачи в базу
+     * Экшн для добавления тендера в базу
      * @param array|null $params
      * @param array|null $postParams
+     * @throws Exception
      */
     public function actionAddTender(?array $params, ?array $postParams)
     {
-        if (false) {
-            $task = new Task;
-            $task->setEmail($postParams['email']);
-            $task->setUser($postParams['user']);
-            $task->setText($postParams['text']);
+        $code = empty($postParams['code']) ? null : $postParams['code'];
+        $number = empty($postParams['number']) ? null : $postParams['number'];
+        $status = empty($postParams['status']) ? null : $postParams['status'];
+        $name = empty($postParams['name']) ? null : $postParams['name'];
+        $date = empty($postParams['date']) ? null : $postParams['date'];
 
-            $this->taskRepository->addNewTask($task);
+        if (!empty($postParams)) {
+            if (null === $name || null === $code || null === $number || null === $status || null === $date) {
+                throw new Exception('Пропущено обязательное поле');
+            } else {
+
+            }
+
         }
 
         $this->viewController->display('addTender');
