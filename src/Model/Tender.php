@@ -47,11 +47,15 @@ class Tender
     /**
      * Возвращает статус
      *
-     * @return string|null
+     * @return TenderStatus|null
      */
-    public function getStatus(): ?string
+    public function getStatus(): ?TenderStatus
     {
-        return $this->status;
+        if (null !== $this->status) {
+            return new TenderStatus($this->status);
+        }
+
+        return null;
     }
 
     /**
@@ -100,11 +104,15 @@ class Tender
     /**
      * Устанавливает значение поля Статус
      *
-     * @param string|null $status
+     * @param TenderStatus|null $status
      */
-    public function setStatus(?string $status): void
+    public function setStatus(?TenderStatus $status): void
     {
-        $this->status = $status;
+        $this->status = null;
+
+        if (null !== $status) {
+            $this->status = $status->getValue();
+        }
     }
 
     /**
