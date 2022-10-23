@@ -18,9 +18,14 @@ class TenderStatus
 
     /**
      * @param string|null $value
+     * @throws Exception
      */
     public function __construct(?string $value = self::EMPTY)
     {
+        if (!in_array($value, self::getList())) {
+            throw new Exception(message: 'Такого статуса не существует');
+        }
+
         $this->value = $value;
     }
 

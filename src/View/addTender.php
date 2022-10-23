@@ -24,7 +24,7 @@
            <input class="form-control item" type="text" name="name" id="name" placeholder="Название" required>
        </div>
        <div class="form-group">
-           <input class="form-control item" type="date" name="date" id="date" placeholder="Дата изм." required>
+           <input class="form-control item" type="datetime-local" name="date" id="date" placeholder="Дата изм." required>
        </div>
         <div class="form-group">
             <button class="btn btn-primary btn-block create-account" type="submit">Добавить тендер</button>

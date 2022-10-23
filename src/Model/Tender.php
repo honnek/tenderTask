@@ -135,7 +135,7 @@ class Tender
         $this->dateEdit = null;
 
         if (null !== $dateEdit) {
-            $this->dateEdit = $dateEdit->format('d.M.y H:i:s');
+            $this->dateEdit = $dateEdit->format('d.m.Y H:i:s');
         }
     }
 }

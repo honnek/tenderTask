@@ -3,10 +3,10 @@
  * @var ViewController $this
  */
 
-//$page = $this->getData()['page'];
-//$limit = $this->getData()['limit'];
-//$countAllTasks = $this->getData()['countAll'];
-//$orderBy = $this->getData()['orderBy'];
+$page = $this->getData()['page'];
+$limit = $this->getData()['limit'];
+$countAllTenders = $this->getData()['countAll'];
+$orderBy = $this->getData()['orderBy'];
 $isAdmin = ($this->getData()['isAdmin']);
 ?>
 
@@ -26,124 +26,83 @@ $isAdmin = ($this->getData()['isAdmin']);
 
 <body>
 <form class="text-xxl-start" action="http://localhost/tender/src/index.php/main/addTender">
-    <button type="submit">Добавить задачу</button>
+    <button type="submit">Добавить тендер</button>
 </form>
 
 
 
 <?php if ($isAdmin) { ?>
-    <form class="text-xxl-end" action="http://localhost/project/src/index.php/main/logout">
+    <form class="text-xxl-end" action="http://localhost/tender/src/index.php/main/logout">
         <button type="submit">Выйти</button>
     </form>
 <?php } else { ?>
-    <form class="text-xxl-end"  action="http://localhost/project/src/index.php/main/login">
+    <form class="text-xxl-end"  action="http://localhost/tender/src/index.php/main/login">
         <button type="submit">Авторизация</button>
     </form>
 <?php } ?>
 <ul class="pagination">
     <li class="page-item">
-        <a class="page-link" href="?by=status">По статусу</a></li>
+        <a class="page-link" href="?by=date_edit">По дате</a></li>
     <li class="page-item">
-        <a class="page-link" href="?by=user">По пользователю</a></li>
-    <li class="page-item">
-        <a class="page-link" href="?by=email">По email</a></li>
+        <a class="page-link" href="?by=name">По названию</a></li>
     <li class="page-item">
         <a class="page-link" href="?">Сбросить фильтры</a></li>
 </ul>
 
 
-<!--<table>-->
-<!--    <tr>-->
-<!--        <td style="background: aliceblue"><h2> Внешний код </h2></td>-->
-<!--        <td style="background: aliceblue"><h2> Номер </h2></td>-->
-<!--        <td style="background: aliceblue"><h2> Статус </h2></td>-->
-<!--        <td style="background: aliceblue"><h2> Название </h2></td>-->
-<!--        <td style="background: aliceblue"><h2> Дата изм. </h2></td>-->
-<!--    </tr>-->
+<table>
+    <tr>
+        <td style="background: aliceblue"><h2> Внешний код </h2></td>
+        <td style="background: aliceblue"><h2> Номер </h2></td>
+        <td style="background: aliceblue"><h2> Статус </h2></td>
+        <td style="background: aliceblue"><h2> Название </h2></td>
+        <td style="background: aliceblue"><h2> Дата изм. </h2></td>
+    </tr>
 
-<!--    --><?php
-//    foreach ($this->getData()['tasks'] as $task) {
-//        ?>
-<!--        <tr>-->
-<!--            <td><h2>--><?//= $task['user'] ?><!--</h2></td>-->
-<!--            <td><h2>--><?//= $task['email'] ?><!--</h2></td>-->
-<!--            <td><h2>--><?//= $task['text'] ?><!--</h2>-->
-<!--                --><?php //if ($isAdmin) { ?>
-<!--                    <form id="editText" method="post" action="http://localhost/project/src/index.php/main/edit">-->
-<!--                        <label>-->
-<!--                            <input hidden type="number" name="id" value="--><?//= $task['id'] ?><!--" >-->
-<!--                            <input  type="text" name="text" value="--><?//= $task['text'] ?><!--">-->
-<!--                        </label>-->
-<!--                        <button class="btn btn-light">Править</button>-->
-<!--                    </form> --><?php //} ?>
-<!--            </td>-->
-<!--            <td><h2>--><?//= $task['status'] ?><!--</h2>-->
-<!--                --><?php //if ($isAdmin) { ?>
-<!--                <form id="editStatus" method="post" action="http://localhost/project/src/index.php/main/edit">-->
-<!--                <p><label>-->
-<!--                        <select name="newStatus">-->
-<!--                            <option value="--><?//= $task['status'] ?><!--">--><?//= $task['status'] ?><!--</option>-->
-<!--                                    <option value="Ожидание">Ожидание</option>-->
-<!--                                    <option value="В работе">В работе</option>-->
-<!--                                    <option value="Тестируется">Тестируется</option>-->
-<!--                                    <option value="Завершено">Завершено</option>-->
-<!--                                </select>-->
-<!--                    </label></p>-->
-<!--                    <input hidden type="number" name="id" value="--><?//= $task['id'] ?><!--" >-->
-<!--                    <p><input type="submit" value="Отправить"></p>-->
-<!--                </form>-->
-<!--                --><?php //} ?>
-<!--            </td>-->
-<!--        </tr>-->
-<!--        --><?php
-//    }
-//    ?>
-<!--</table>-->
+    <?php
+    foreach ($this->getData()['tenders'] as $tender) {
+        ?>
+        <tr>
+            <td><h2><?= $tender['code'] ?></h2></td>
+            <td><h2><?= $tender['number'] ?></h2></td>
+            <td><h2><?= $tender['status'] ?></h2></td>
+            <td><h2><?= $tender['name'] ?></h2></td>
+            <td><h2><?= $tender['date_edit'] ?></h2></td>
 
-<!--<ul class="pagination">-->
-<!--    <li class="page-item">-->
-<!--        <a class="page-link" href="?page=1&by=--><?//= $orderBy ?><!--">First</a></li>-->
-<!--    <li class="page-item">-->
-<!--        <a class="page-link" href="--><?//= ($page <= 1) ? '#&by=$orderBy' : "?by=$orderBy&page=" . ($page - 1); ?><!--">Prev</a>-->
-<!--    </li>-->
-<!--    <li class="page-item">-->
-<!--        <a class="page-link" href="--><?php //if ($page * $limit === $countAllTasks) {
-//            if ($page >= (int)($countAllTasks / $limit) + 1) {
-//                echo '#';
-//            }
-//            {
-//                echo "?by=$orderBy&page=" . ($page);
-//            }
-//        } else {
-//            if ($page >= (int)($countAllTasks / $limit) + 1) {
-//                echo '#';
-//            } else {
-//                echo "?by=$orderBy&page=" . ($page + 1);
-//            }
-//        } ?><!--">Next</a>-->
-<!--    </li>-->
-<!--    <li class="page-item">-->
-<!--        <a class="page-link"-->
-<!--           href="?by=--><?//= $orderBy ?><!--&page=--><?//= ($countAllTasks % $limit === 0) ? (int)($countAllTasks / $limit) : (int)($countAllTasks / $limit) + 1 ?><!--">Last</a>-->
-<!--    </li>-->
-<!--</ul>-->
+        </tr>
+        <?php
+    }
+    ?>
+</table>
 
-<!--<form action="http://localhost/project/src/index.php/main/AddTask" method="post">-->
-<!--    <div>-->
-<!--        <h3 class="text-center">Задайте новую задачу</h3>-->
-<!--        <div class="form-group">-->
-<!--            <input class="form-control item" type="text" name="user" id="user" placeholder="Логин">-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <input class="form-control item" type="text" name="email" id="email" placeholder="email" required>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <input class="form-control item" type="text" name="text" id="text" placeholder="текст" required>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <button class="btn btn-primary btn-block create-account" type="submit">Добавить задачу</button>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</form>-->
+<ul class="pagination">
+    <li class="page-item">
+        <a class="page-link" href="?page=1&by=<?= $orderBy ?>">First</a></li>
+    <li class="page-item">
+        <a class="page-link" href="<?= ($page <= 1) ? '#&by=$orderBy' : "?by=$orderBy&page=" . ($page - 1); ?>">Prev</a>
+    </li>
+    <li class="page-item">
+        <a class="page-link" href="<?php if ($page * $limit === $countAllTenders) {
+            if ($page >= (int)($countAllTenders / $limit) + 1) {
+                echo '#';
+            }
+            {
+                echo "?by=$orderBy&page=" . ($page);
+            }
+        } else {
+            if ($page >= (int)($countAllTenders / $limit) + 1) {
+                echo '#';
+            } else {
+                echo "?by=$orderBy&page=" . ($page + 1);
+            }
+        } ?>">Next</a>
+    </li>
+    <li class="page-item">
+        <a class="page-link"
+           href="?by=<?= $orderBy ?>&page=<?= ($countAllTenders % $limit === 0) ? (int)($countAllTenders / $limit) : (int)($countAllTenders / $limit) + 1 ?>">Last</a>
+    </li>
+</ul>
+
+
 </body>
 </html>
