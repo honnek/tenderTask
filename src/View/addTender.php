@@ -8,7 +8,7 @@
     <title>addTender</title>
 </head>
 <body>
-<form action="http://localhost/project/src/index.php/main/AddTask" method="post">
+<form action="http://localhost/tender/src/index.php/main/AddTender" method="post">
    <div>
       <h3 class="text-center">Задайте новый тендер</h3>
       <div class="form-group">

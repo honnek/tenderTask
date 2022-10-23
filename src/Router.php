@@ -58,6 +58,7 @@ class Router
             $this->controller = new ErrorController();
             $this->action = 'actionError';
         }
+
         return $this->controller;
     }
 

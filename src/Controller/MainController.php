@@ -2,8 +2,10 @@
 
 use JetBrains\PhpStorm\Pure;
 
-spl_autoload('Model/TaskRepository');
-spl_autoload('Model/UserRepository');
+spl_autoload('Model/TenderRepository');
+spl_autoload('Model/Tender');
+spl_autoload('Model/TenderStatus');
+spl_autoload('Model/PdoSingleton');
 
 /**
  * Основной контроллер
@@ -13,6 +15,8 @@ class MainController
     /** @var ViewController $viewController */
     protected ViewController $viewController;
 
+    /** @var TenderRepository $tenderRepository */
+    protected TenderRepository $tenderRepository;
 
     /**
      * Инициализируем поля
@@ -20,6 +24,7 @@ class MainController
     #[Pure] public function __construct()
     {
         $this->viewController = new ViewController();
+        $this->tenderRepository = new TenderRepository();
     }
 
     /**
@@ -72,7 +77,16 @@ class MainController
             if (null === $name || null === $code || null === $number || null === $status || null === $date) {
                 throw new Exception('Пропущено обязательное поле');
             } else {
+                $tender = new Tender();
+                $tender->setCode($code);
+                $tender->setNumber($number);
+                $tender->setStatus(new TenderStatus($status));
+                $tender->setName($name);
+                $tender->setDateEdit(new DateTimeImmutable($date));
 
+                $this->tenderRepository->add($tender);
+
+                header('Location: http://localhost/tender/src/index.php/main/main');
             }
 
         }
