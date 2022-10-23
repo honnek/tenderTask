@@ -20,6 +20,21 @@ class TenderRepository
         return $query->rowCount();
     }
 
+    public function findByCode(string $code): array|false
+    {
+        $pdo = PdoSingleton::getInstance();
+
+        $sql = 'SELECT * FROM `test_task_data` WHERE `code` = :code';
+
+        $params = [
+            ':code' => $code
+        ];
+
+        $query = $pdo->prepare($sql);
+        $query->execute($params);
+
+        return $query->fetch();
+    }
 
     /**
      * Возвращает массив тендеров с указными limit offset и упорядоченными по orderBy

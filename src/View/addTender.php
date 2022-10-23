@@ -5,9 +5,14 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>addTender</title>
+    <link rel="stylesheet" href="http://localhost/tender/src/css/main.css">
+    <link rel="stylesheet" href="http://localhost/tender/src/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://localhost/tender/src/css/main.css">
+    <title>Добавить тендер</title>
 </head>
+
 <body>
+
 <form action="http://localhost/tender/src/index.php/main/AddTender" method="post">
    <div>
       <h3 class="text-center">Задайте новый тендер</h3>

@@ -28,6 +28,37 @@ class MainController
     }
 
     /**
+     * @param array|null $params
+     * @param array|null $postParams
+     * @throws Exception
+     */
+    public function actionTender(?array $params, ?array $postParams)
+    {
+        $code = empty($params) ? null : $params['code'];
+        $tender = null;
+
+        if (null !== $code) {
+            $tenderArray = $this->tenderRepository->findByCode($code);
+            if (!$tenderArray) {
+                throw new Exception(message: 'не найден тендер с таким кодом');
+            }
+
+            $tender = new Tender();
+            $tender->setCode($tenderArray['code']);
+            $tender->setNumber($tenderArray['number']);
+            $tender->setStatus(new TenderStatus($tenderArray['status']));
+            $tender->setName($tenderArray['name']);
+            $tender->setDateEdit(new DateTimeImmutable($tenderArray['date_edit']));
+        }
+
+        $this->viewController->setData([
+            'tender' => $tender,
+        ]);
+        $this->viewController->display('tender');
+    }
+
+
+    /**
      * Основной экшн для главной страницы
      */
     public function actionMain(?array $params)

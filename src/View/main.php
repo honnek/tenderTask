@@ -7,7 +7,7 @@ $page = $this->getData()['page'];
 $limit = $this->getData()['limit'];
 $countAllTenders = $this->getData()['countAll'];
 $orderBy = $this->getData()['orderBy'];
-$isAdmin = ($this->getData()['isAdmin']);
+$isAdmin = $this->getData()['isAdmin'];
 ?>
 
 
